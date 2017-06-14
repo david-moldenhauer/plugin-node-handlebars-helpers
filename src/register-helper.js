@@ -5,9 +5,9 @@ function registerHelper(patternlab, Handlebars) {
     let html = '';
     let src = patternlab.responsiveImage[options.hash.src];
     let suffix = patternlab.responsiveImage[options.hash.suffix];
-    html = src;
+    html = options.fn(src);
     html += ', suffix: ';
-    html += suffix;
+    html += options.fn(suffix);
     /*<img data-interchange="[{{imageName}}-520.jpg, small], [{{imageName}}-980.jpg, medium], [{{imageName}}-1680.jpg, large]">
     responsiveImage.forEach(function(listitem) {
       if (patternlab.config.debug) {
