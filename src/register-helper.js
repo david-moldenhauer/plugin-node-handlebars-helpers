@@ -10,8 +10,12 @@ function registerHelper(patternlab, Handlebars) {
             html += src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '[$1-'+breakpoint+'.$3, '+breakpoint+'],');
         });
         html = html.substring(0,html.length-1);
-        html += '">'
+        html += '">';
         return new Handlebars.SafeString(html);
+    });
+    Handlebars.registerHelper("moduloIf", function(index_count,mod,eq,block) {
+        if(parseInt(index_count)%(mod)=== eq){
+            return block.fn(this);}
     });
 }
 
