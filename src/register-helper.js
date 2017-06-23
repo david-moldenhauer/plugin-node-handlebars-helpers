@@ -24,7 +24,7 @@ function registerHelper(patternlab, Handlebars) {
         }else if(dictionary == 'starwars'){
             dictionary = require('./lorem-ipsum-dictionaries/starwars.js').words;
         }else{
-            dictionary = undefined;
+            dictionary = false;
         }
         count = parseInt(count) || 1;
         let output = loremIpsum({count:parseInt(count), units:units, format:format, words:dictionary});
