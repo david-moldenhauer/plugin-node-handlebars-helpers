@@ -1,4 +1,5 @@
 'use strict';
+var loremIpsum = require('knicklabs-lorem-ipsum.js');
 
 function registerHelper(patternlab, Handlebars) {
     Handlebars.registerHelper('imgInterchange', function(options) {
@@ -12,6 +13,17 @@ function registerHelper(patternlab, Handlebars) {
         html = html.substring(0,html.length-1);
         html += '">';
         return new Handlebars.SafeString(html);
+    });
+    Handlebars.registerHelper("lorem-ipsum", function(count, units, format) {
+        if(!units || !(units == 'words' || units == 'sentences' || units == 'paragraphs')){
+            units = 'paragraphs';
+        }if(!format || !(format == 'plain' || format == 'html')){
+            format = 'html';
+        }if(!count || (parseInt(count) == NaN)){
+            count = 1;
+        }
+        let output = loremIpsum({count:count, units:units, format:format});
+        return new Handlebars.SafeString(output);
     });
     Handlebars.registerHelper("mod", function(index_count,modulo) {
         return index_count % modulo;
