@@ -15,6 +15,7 @@ function registerHelper(patternlab, Handlebars) {
         return new Handlebars.SafeString(html);
     });
     Handlebars.registerHelper("lorem-ipsum", function(count, units, format, dictionary) {
+        if(!dictionary){dictionary = patternlab.config.plugins['plugin-node-handlebars-helpers'].client}
         if(!units || !(units == 'words' || units == 'sentences' || units == 'paragraphs')){
             units = 'paragraphs';
         }if(!format || !(format == 'plain' || format == 'html')){
