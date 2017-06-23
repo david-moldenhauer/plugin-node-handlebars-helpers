@@ -1,5 +1,5 @@
 'use strict';
-var loremIpsum = require('knicklabs-lorem-ipsum.js');
+var loremIpsum = require('lorem-ipsum');
 
 function registerHelper(patternlab, Handlebars) {
     Handlebars.registerHelper('imgInterchange', function(options) {
