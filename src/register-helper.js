@@ -19,11 +19,10 @@ function registerHelper(patternlab, Handlebars) {
             units = 'paragraphs';
         }if(!format || !(format == 'plain' || format == 'html')){
             format = 'html';
-        }if(!count || (parseInt(count) == NaN)){
-            count = 1;
         }
-        let output = loremIpsum({count:count, units:units, format:format});
-        return new Handlebars.SafeString(output);
+        count = parseInt(count) || 1;
+        let output = loremIpsum({count:parseInt(count), units:units, format:format});
+        return new Handlebars.SafeString(output+' test: '+count+', '+units+', '+format);
     });
     Handlebars.registerHelper("mod", function(index_count,modulo) {
         return index_count % modulo;
