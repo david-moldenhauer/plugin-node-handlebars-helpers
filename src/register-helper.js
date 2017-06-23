@@ -14,14 +14,20 @@ function registerHelper(patternlab, Handlebars) {
         html += '">';
         return new Handlebars.SafeString(html);
     });
-    Handlebars.registerHelper("lorem-ipsum", function(count, units, format) {
+    Handlebars.registerHelper("lorem-ipsum", function(count, units, format, dictionary) {
         if(!units || !(units == 'words' || units == 'sentences' || units == 'paragraphs')){
             units = 'paragraphs';
         }if(!format || !(format == 'plain' || format == 'html')){
             format = 'html';
+        }if(dictionary == 'bacon'){
+            dictionary = require('./lorem-ipsum-dictionaries/bacon.js').words;
+        }else if(dictionary == 'starwars'){
+            dictionary = require('./lorem-ipsum-dictionaries/starwars.js').words;
+        }else{
+            dictionary = undefined;
         }
         count = parseInt(count) || 1;
-        let output = loremIpsum({count:parseInt(count), units:units, format:format});
+        let output = loremIpsum({count:parseInt(count), units:units, format:format, words:dictionary});
         return new Handlebars.SafeString(output);
     });
     Handlebars.registerHelper("mod", function(index_count,modulo) {
