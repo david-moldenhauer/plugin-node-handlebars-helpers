@@ -22,7 +22,7 @@ function registerHelper(patternlab, Handlebars) {
         }
         count = parseInt(count) || 1;
         let output = loremIpsum({count:parseInt(count), units:units, format:format});
-        return new Handlebars.SafeString(output+' test: '+count+', '+units+', '+format);
+        return new Handlebars.SafeString(output);
     });
     Handlebars.registerHelper("mod", function(index_count,modulo) {
         return index_count % modulo;
