@@ -23,6 +23,8 @@ function registerHelper(patternlab, Handlebars) {
             dictionary = require('./lorem-ipsum-dictionaries/bacon.js').words;
         }else if(dictionary == 'starwars'){
             dictionary = require('./lorem-ipsum-dictionaries/starwars.js').words;
+        }else if(dictionary == 'bmw'){
+            dictionary = require('./lorem-ipsum-dictionaries/bmw.js').words;
         }else{
             dictionary = false;
         }
