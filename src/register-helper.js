@@ -69,6 +69,15 @@ function registerHelper(patternlab, Handlebars) {
         }
         return false
     });
+    Handlebars.registerHelper("random", function(quantifier) {
+        return parseInt(Math.random()*quantifier);
+    });
+    Handlebars.registerHelper("add", function(value1, value2) {
+        return parseInt(value1+value2);
+    });
+    Handlebars.registerHelper("subtract", function(value1, value2) {
+        return parseInt(value1-value2);
+    });
 }
 
 module.exports = registerHelper;
