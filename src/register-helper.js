@@ -9,6 +9,14 @@ function registerHelper(patternlab, Handlebars) {
                     this[key] = arguments[n].hash[key];
                 }
             }
+            if(arguments[n].fn){
+                let object = JSON.parse(arguments[n].fn(this));
+                if(object){
+                    for (let key in object) {
+                        this[key] = object[key];
+                    }
+                }
+            }
         }
         return '';
     });
