@@ -2,6 +2,16 @@
 var loremIpsum = require('lorem-ipsum');
 
 function registerHelper(patternlab, Handlebars) {
+    Handlebars.registerHelper("set", function() {
+        for(let n in arguments){
+            if(arguments[n].hash){
+                for (let key in arguments[n].hash) {
+                    this[key] = arguments[n].hash[key];
+                }
+            }
+        }
+        return '';
+    });
     Handlebars.registerHelper("uuid", function() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
