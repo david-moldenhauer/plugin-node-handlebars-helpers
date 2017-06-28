@@ -34,6 +34,7 @@ function registerHelper(patternlab, Handlebars) {
         let breakpoints = options.hash.breakpoint.split(/[\,\;\| ]+/);
         if(!src || breakpoints.length < 1){
             console.log("there is something wrong with the arguments passed to imgInterchange!\nsrc: "+src+"breakpoints: "+breakpoints.toString());
+            return "";
         }
         html += '<img data-interchange="';
         breakpoints.forEach(function(breakpoint) {
