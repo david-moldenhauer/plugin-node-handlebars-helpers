@@ -18,7 +18,7 @@ function registerHelper(patternlab, Handlebars) {
                         }
                     }
                 }catch(error){
-                    console.log("there is something wrong with the JSON sent to {{#set}}...{{/set}}\n"+error.toString());
+                    console.log("\x1b[31m%s\x1b[0m", "there is something wrong with the JSON sent to {{#set}}...{{/set}}\n"+error.toString());
                 }
             }
         }
@@ -37,7 +37,7 @@ function registerHelper(patternlab, Handlebars) {
         let src = options.hash.src;
         let breakpoints = options.hash.breakpoint.split(/[\,\;\| ]+/);
         if(!src || breakpoints.length < 1){
-            console.log("there is something wrong with the arguments passed to imgInterchange!\nsrc: "+src+"breakpoints: "+breakpoints.toString());
+            console.log("\x1b[31m%s\x1b[0m", "there is something wrong with the arguments passed to imgInterchange!\nsrc: "+src+"breakpoints: "+breakpoints.toString());
             return "";
         }
         html += '<img data-interchange="';
