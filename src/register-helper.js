@@ -24,6 +24,25 @@ function registerHelper(patternlab, Handlebars) {
         }
         return '';
     });
+    Handlebars.registerHelper("push", function(options) {
+        try {
+            let target = options.hash.to;
+            let replace = options.hash.replace || false;
+            let object = JSON.parse(options.fn(this));
+            if (replace) {
+                for (var i = 0; i < target.length; i++) {
+                    if (JSON.stringify(target[i]) == JSON.stringify(object)) {
+                        return '';
+                    }
+                }
+            }
+            target.push(object);
+            options.fn(target);
+        }catch(error){
+            console.log("\x1b[31m%s\x1b[0m", "there is something wrong with the arguments sent to {{#push}}...{{/push}}\n"+error.toString());
+        }
+        return '';
+    });
     Handlebars.registerHelper("uuid", function() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
