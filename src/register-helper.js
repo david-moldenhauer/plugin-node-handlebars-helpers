@@ -10,11 +10,15 @@ function registerHelper(patternlab, Handlebars) {
                 }
             }
             if(arguments[n].fn){
-                let object = JSON.parse(arguments[n].fn(this));
-                if(object){
-                    for (let key in object) {
-                        this[key] = object[key];
+                try{
+                    let object = JSON.parse(arguments[n].fn(this));
+                    if(object){
+                        for (let key in object) {
+                            this[key] = object[key];
+                        }
                     }
+                }catch(error){
+                    console.log("there is something wrong with the JSON sent to {{#set}}...{{/set}}\n"+error.toString());
                 }
             }
         }
