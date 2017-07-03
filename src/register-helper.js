@@ -1,5 +1,5 @@
 'use strict';
-var loremIpsum = require('lorem-ipsum');
+const loremIpsum = require('lorem-ipsum');
 
 function registerHelper(patternlab, Handlebars) {
     Handlebars.registerHelper("set", function() {
@@ -30,7 +30,7 @@ function registerHelper(patternlab, Handlebars) {
             let replace = options.hash.replace || false;
             let object = JSON.parse(options.fn(this));
             if (replace) {
-                for (var i = 0; i < target.length; i++) {
+                for (let i = 0; i < target.length; i++) {
                     if (JSON.stringify(target[i]) == JSON.stringify(object)) {
                         return '';
                     }
@@ -59,7 +59,7 @@ function registerHelper(patternlab, Handlebars) {
             console.log("\x1b[31m%s\x1b[0m", "there is something wrong with the arguments passed to imgInterchange!\nsrc: "+src+"breakpoints: "+breakpoints.toString());
             return "";
         }
-        html += '<img data-interchange="';
+        html += '<img src="'+src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '[$1-'+breakpoint[0]+'.$3, '+breakpoint[0]+'],')+'" data-interchange="';
         breakpoints.forEach(function(breakpoint) {
             html += src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '[$1-'+breakpoint+'.$3, '+breakpoint+'],');
         });
