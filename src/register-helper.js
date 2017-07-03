@@ -59,7 +59,7 @@ function registerHelper(patternlab, Handlebars) {
             console.log("\x1b[31m%s\x1b[0m", "there is something wrong with the arguments passed to imgInterchange!\nsrc: "+src+"breakpoints: "+breakpoints.toString());
             return "";
         }
-        html += '<img src="'+src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '[$1-'+breakpoints[0]+'.$3, '+breakpoints[0]+'],')+'" data-interchange="';
+        html += '<img src="'+src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '$1-'+breakpoints[0]+'.$3')+'" data-interchange="';
         breakpoints.forEach(function(breakpoint) {
             html += src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '[$1-'+breakpoint+'.$3, '+breakpoint+'],');
         });
