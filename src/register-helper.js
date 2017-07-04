@@ -14,8 +14,7 @@ function registerHelper(patternlab, Handlebars) {
                     let object = JSON.parse(arguments[n].fn(this));
                     if(object){
                         for (let key in object) {
-                            let result = Object.assign({},this[key], object[key])
-                            this[key] = result[key];
+                            this[key] = Object.assign(this[key], object[key]);
                         }
                     }
                 }catch(error){
