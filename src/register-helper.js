@@ -14,7 +14,11 @@ function registerHelper(patternlab, Handlebars) {
                     let object = JSON.parse(arguments[n].fn(this));
                     if(object){
                         for (let key in object) {
-                            this[key] = Object.assign(this[key], object[key]);
+                            if(undefined == this[key]){
+                                this[key] = object[key];
+                            }else{
+                                this[key] = Object.assign(this[key], object[key]);
+                            }
                         }
                     }
                 }catch(error){
@@ -23,6 +27,15 @@ function registerHelper(patternlab, Handlebars) {
             }
         }
         return '';
+    });
+    Handlebars.registerHelper("eitherOr", function() {
+        let length = Object.keys(arguments).length;
+        let index = 0;
+        for(let n in arguments){
+            index++;if(index === length){return false;}
+            if(arguments[n]){return arguments[n];}
+        }
+        return false;
     });
     Handlebars.registerHelper("push", function(options) {
         try {
