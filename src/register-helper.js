@@ -99,6 +99,9 @@ function registerHelper(patternlab, Handlebars) {
         let output = loremIpsum({count:parseInt(count), units:units, format:format, words:dictionary});
         return new Handlebars.SafeString(output);
     });
+    Handlebars.registerHelper("toJson", function(object) {
+        return new Handlebars.SafeString(JSON.stringify(object));
+    });
     Handlebars.registerHelper("mod", function(index_count,modulo) {
         return index_count % modulo;
     });
