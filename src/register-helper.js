@@ -67,12 +67,13 @@ function registerHelper(patternlab, Handlebars) {
     Handlebars.registerHelper('imgInterchange', function(options) {
         let html = '';
         let src = options.hash.src;
+        let classes = options.hash.classes || "";
         let breakpoints = options.hash.breakpoint.split(/[\,\;\| ]+/);
         if(!src || breakpoints.length < 1){
             console.log("\x1b[31m%s\x1b[0m", "there is something wrong with the arguments passed to imgInterchange!\nsrc: "+src+"breakpoints: "+breakpoints.toString());
             return "";
         }
-        html += '<img src="'+src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '$1-'+breakpoints[0]+'.$3')+'" data-interchange="';
+        html += '<img class="'+classes+'" src="'+src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '$1-'+breakpoints[0]+'.$3')+'" data-interchange="';
         breakpoints.forEach(function(breakpoint) {
             html += src.replace(/([^\s]+)(\.)(jpg|png|gif|bmp)$/, '[$1-'+breakpoint+'.$3, '+breakpoint+'],');
         });
