@@ -151,6 +151,9 @@ function registerHelper(patternlab, Handlebars) {
     Handlebars.registerHelper("subtract", function(value1, value2) {
         return parseInt(value1-value2);
     });
+    Handlebars.registerHelper("contains", function(object, value) {
+        return object.indexOf(value) != -1;
+    });
 }
 
 module.exports = registerHelper;
