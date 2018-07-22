@@ -29,9 +29,13 @@ function registerHelper(patternlab, Handlebars) {
         }
         return '';
     });
-    Handlebars.registerHelper("file", function(file){
+    Handlebars.registerHelper("file", function(file, escaped){
         if(fs.existsSync(file)){
-            return fs.readFileSync(file, "utf8");
+            let data = fs.readFileSync(file, "utf8");
+            if(escaped === true){
+                data = data.replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+            }
+            return data;
         }else{
             console.log("\x1b[31m%s\x1b[0m", "the file {{file \""+file+"\"}} does not exist\n");
         }
