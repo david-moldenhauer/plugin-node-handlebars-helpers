@@ -1,5 +1,6 @@
 'use strict';
 const loremIpsum = require('lorem-ipsum');
+const fs = require('fs');
 
 function registerHelper(patternlab, Handlebars) {
     Handlebars.registerHelper("set", function() {
@@ -27,6 +28,14 @@ function registerHelper(patternlab, Handlebars) {
             }
         }
         return '';
+    });
+    Handlebars.registerHelper("file", function(file){
+        if(fs.existsSync(file)){
+            return fs.readFileSync(file, "utf8");
+        }else{
+            console.log("\x1b[31m%s\x1b[0m", "the file {{file \""+file+"\"}} does not exist\n");
+        }
+
     });
     Handlebars.registerHelper("eitherOr", function() {
         let length = Object.keys(arguments).length;
@@ -141,6 +150,33 @@ function registerHelper(patternlab, Handlebars) {
             return true;
         }
         return false
+    });
+    Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+        switch (operator) {
+            case '==':
+                return (v1 == v2) ? options.fn(this) : options.inverse(this);
+            case '===':
+                return (v1 === v2) ? options.fn(this) : options.inverse(this);
+            case '!=':
+                return (v1 != v2) ? options.fn(this) : options.inverse(this);
+            case '!==':
+                return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+            case '<':
+                return (v1 < v2) ? options.fn(this) : options.inverse(this);
+            case '<=':
+                return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+            case '>':
+                return (v1 > v2) ? options.fn(this) : options.inverse(this);
+            case '>=':
+                return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+            case '&&':
+                return (v1 && v2) ? options.fn(this) : options.inverse(this);
+            case '||':
+                return (v1 || v2) ? options.fn(this) : options.inverse(this);
+            default:
+                return options.inverse(this);
+        }
     });
     Handlebars.registerHelper("random", function(quantifier) {
         return parseInt(Math.random()*quantifier);
